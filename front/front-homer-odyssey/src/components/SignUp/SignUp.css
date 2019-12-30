@@ -1,0 +1,13 @@
+fieldset {
+  width: 20%;
+  padding: 1rem 1rem;
+  margin: 0 auto;
+}
+
+input {
+  display: block;
+  margin: 0.5rem auto;
+  width: 85%;
+  height: 2rem;
+  padding: 0.25rem;
+}
