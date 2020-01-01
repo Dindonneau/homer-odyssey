@@ -7,7 +7,6 @@ class SignUp extends Component {
     this.state = {
       email: "mon@email.com",
       password: "monPassw0rd",
-      passwordconf: "",
       name: "James",
       lastname: "Bond"
     };
@@ -18,9 +17,24 @@ class SignUp extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.state.password === this.state.passwordconf
-      ? console.log(JSON.stringify(this.state, 1, 1))
-      : console.log("passwords entered are different");
+    if (
+      this.state.password ===
+      document.getElementsByName("passwordconf")[0].value
+    ) {
+      console.log(JSON.stringify(this.state, 1, 1));
+      fetch("/auth/signup", {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(this.state)
+      })
+        .then(res => res.json())
+        .then(
+          res => this.setState({ flash: res.flash }),
+          err => this.setState({ flash: err.flash })
+        );
+    } else console.log("passwords entered are different");
   };
 
   render() {
@@ -48,7 +62,6 @@ class SignUp extends Component {
               type="password"
               name="passwordconf"
               placeholder="confirm password"
-              onChange={this.updateField}
             />
 
             <input
