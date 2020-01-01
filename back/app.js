@@ -7,8 +7,7 @@ const morgan = require("morgan");
 
 const app = express();
 
-const authRouter = require("./routes/auth/auth");
-const connection = require("./helpers/db.js");
+const authRouter = require("./routes/auth/auth.js");
 
 // set up the application
 app.use(morgan("dev"));

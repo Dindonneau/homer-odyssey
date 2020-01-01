@@ -3,9 +3,9 @@ const router = express.Router();
 const connection = require("../../helpers/db.js");
 
 router.post("/signup", function(req, res, next) {
-  const post = req.body;
+  const form = req.body;
 
-  connection.query("INSERT INTO posts SET ?", post, function(
+  connection.query("INSERT INTO users SET ?", form, function(
     error,
     results,
     fields
