@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const app = express();
 
 const authRouter = require("./routes/auth/auth");
+const connection = require("./helpers/db.js");
 
 // set up the application
 app.use(morgan("dev"));
@@ -15,12 +16,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
+app.use("/auth", authRouter); //where authRouter is imported
+
 // implement the API part
 app.get("/", (req, res) => {
   res.send("youhou");
 });
-
-app.use("/auth", authRouter); //where authRouter is imported
 
 /// in case path is not found, return the 'Not Found' 404 code
 app.use(function(req, res, next) {
